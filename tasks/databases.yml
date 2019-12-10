@@ -11,7 +11,7 @@
   tags: mariadb
 
 - name: Create user defined databases
-  mysql_db:
+  mysql_user:
     name: "{{ item.name }}"
     login_user: root
     login_password: "{{ mariadb_root_password }}"
