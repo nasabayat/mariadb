@@ -29,7 +29,7 @@
       dest: /home/naser/mysql_backup.sh
       owner: naser
       group: naser
-      mode: '0644'
+      mode: '0664'
 
 - hosts: ultratendency
   become: true
