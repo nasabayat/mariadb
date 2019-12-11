@@ -37,9 +37,9 @@
   vars:
     cron_jobs:
       - name: schedule MariaDB backup
-        job: "/bin/bash /home/naser/scripts/mysql_backup.sh > /dev/null 2>&1"
+        job: "/bin/bash /home/naser/mysql_backup.sh > /dev/null 2>&1"
         minute: "*/1"
 
   roles:
-    - role: cron
+    - cron
 
