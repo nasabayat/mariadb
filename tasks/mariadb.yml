@@ -1,0 +1,20 @@
+---
+- hosts: ultratendency
+  become: true
+  remote_user: tendency
+  vars:
+    mariadb_mirror: 'mariadb.mirror.nucleus.be/yum'
+    mariadb_bind_address: '0.0.0.0'
+    mariadb_root_password: 'BuIxB0ukAm'
+    mariadb_users:
+      - name: backup_admin
+        password: '123456'
+        priv: "*:ALL"
+        host: "%"
+    mariadb_custom_cnf:
+      mysqld:
+        general-log:
+        general-log-file: queries.log
+        log-output: file  
+  roles:
+    - mariadb               

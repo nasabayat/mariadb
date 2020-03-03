@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  author: Naser Bayat
+  description: Manage MariaDB on a RedHat based Linux distribution.
+  license: BSD
+  min_ansible_version: 2.8
+  platforms:
+    - name: EL
+      versions:
+        - 7
+  galaxy_tags:
+    - database
+    - sql
+dependencies: []

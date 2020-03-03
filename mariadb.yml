@@ -1,0 +1,45 @@
+---
+- hosts: ultratendency
+  become: true
+  remote_user: naser
+  vars:
+    mariadb_mirror: 'mariadb.mirror.nucleus.be/yum'
+    mariadb_bind_address: '0.0.0.0'
+    mariadb_root_pasisword: '123456'
+    mariadb_users:
+      - name: backup_admin
+        password: '123456'
+        priv: "backup_admin.*:ALL"
+        host: "%"
+    mariadb_custom_cnf:
+      mysqld:
+        general-log:
+        general-log-file: queries.log
+        log-output: file  
+  roles:
+    - mariadb               
+
+- hosts: ultratendency
+  become: true
+  remote_user: naser
+  tasks:
+  - name: 
+    copy:
+      src: /home/naser/scripts/mysqldump_backup.sh
+      dest: /home/naser/mysql_backup.sh
+      owner: naser
+      group: naser
+      mode: '0664'
+
+- hosts: ultratendency
+  become: true
+  remote_user: naser
+  vars:
+    cron_jobs:
+      - name: schedule MariaDB backup
+        job: "/bin/bash /home/naser/mysql_backup.sh > /dev/null 2>&1"
+        minute: "*/1"
+
+  roles:
+    - cron
+
